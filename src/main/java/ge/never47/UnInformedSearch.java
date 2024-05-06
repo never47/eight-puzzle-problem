@@ -3,7 +3,7 @@ package ge.never47;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UniformedSearch {
+public class UnInformedSearch {
     public static List<Node> openList = new ArrayList<>(); // nodes which children where not studied
     public static List<Node> closedList = new ArrayList<>(); // nodes that were studied
     private static int col_count = 3; // just for code design <3
@@ -22,17 +22,18 @@ public class UniformedSearch {
             5) After checking all the children, adds node to closedList
      */
     public static void BFS(Node root) {
+        // ************ Adding root in openList, STARTING ************
         boolean goalFound = false;
         openList.add(root);
 
         while(!openList.isEmpty() && !goalFound){
+            // ******* Getting first in queue, creating its children list *******
             Node currNode = openList.remove(0);
-            
             closedList.add(currNode);
-
 
             List<Node> currNode_children = new ArrayList<>();
 
+            // ***** Calculating allowable movements => adding children into list *****
             int empty_cell = currNode.getEmptyCell();
             int row = Math.floorDiv(empty_cell, 3);
             int column = empty_cell % 3;
@@ -53,6 +54,7 @@ public class UniformedSearch {
                 currNode_children.add(currNode.moveToDown());
             }
 
+            // *** Checking each child on goalTest, adding to openList ***
             for (Node currNode_child : currNode_children) {
                 if (currNode_child.goalTest(new int[]
                         {1, 2, 3,

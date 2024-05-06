@@ -41,7 +41,7 @@ public class Node {
         Function compares object state to goalState,
         if their value is equal => returns true, else => false
 
-        goalState can be different, not hard coding
+        goalState matrix can be different
      */
     public boolean goalTest(int[] goalState){
         for(int i =0; i<goalState.length;i++){
@@ -64,8 +64,6 @@ public class Node {
             info+= state[i] + " ";
         }
 
-        info+="Depth: " + depth;
-        info+="Parent: " + parentNode;
         info+="\n";
         return info;
     }
