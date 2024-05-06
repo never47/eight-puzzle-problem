@@ -4,60 +4,61 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UniformedSearch {
-    public static List<Node> pathToSolution = new ArrayList<Node>();
-    public static List<Node> openList = new ArrayList<Node>();
-
+    public static List<Node> openList = new ArrayList<>();
+    public static List<Node> closedList = new ArrayList<>();
     private static int col_count = 3;
 
 
-    public static List<Node> BFS(Node root){
+    public static void BFS(Node root) {
         boolean goalFound = false;
         openList.add(root);
 
         while(!openList.isEmpty() && !goalFound){
-            Node currNode = openList.get(0);
-            openList.remove(0);
+            Node currNode = openList.remove(0);
+            
+            closedList.add(currNode);
 
-            List<Node> currNode_children = new ArrayList<Node>();
+
+            List<Node> currNode_children = new ArrayList<>();
 
             int empty_cell = currNode.getEmptyCell();
+            int row = Math.floorDiv(empty_cell, 3);
+            int column = empty_cell % 3;
 
-            if(empty_cell % col_count < col_count - 1){
+            if(currNode.getAction()!='l' && column < 2){
                 currNode_children.add(currNode.moveToRight());
             }
 
-            if(empty_cell % col_count > 0){
+            if(currNode.getAction()!='r' && column > 0){
                 currNode_children.add(currNode.moveToLeft());
             }
 
-            if(empty_cell - col_count >= 0){
+            if(currNode.getAction()!='d' && row > 0){
                 currNode_children.add(currNode.moveToUp());
             }
 
-            if(empty_cell + col_count < 9){
+            if(currNode.getAction()!='u' && row < 2){
                 currNode_children.add(currNode.moveToDown());
             }
 
-            for(int i = 0; i < currNode_children.size();i++){
-                Node currNode_child = currNode_children.get(i);
-                currNode_child.printPuzzle();
-                System.out.println();
+            for (Node currNode_child : currNode_children) {
+                if (currNode_child.goalTest(new int[]
+                        {1, 2, 3,
+                                8, 0, 4,
+                                7, 6, 5}
 
-                if(currNode_child.goalTest(new int[]
-                        {1,2,3,
-                         0,8,4,
-                         7,6,5}
-
-                )){
+                )) {
                     System.out.println("FIND");
                     goalFound = true;
                     break;
-                }else{
+                }
+
+                if (!openList.contains(currNode_child) && !closedList.contains(currNode_child)) {
+                    System.out.println(currNode_child.printPuzzle());
                     openList.add(currNode_child);
                 }
             }
         }
-
-        return pathToSolution;
     }
+
 }
