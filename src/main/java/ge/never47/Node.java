@@ -7,17 +7,18 @@ package ge.never47;
 import java.util.Arrays;
 
 public class Node {
-    private int[] state = new int[9];
-    private Node parentNode;
-    private int emptyCell;
-    private char action;
-    private int depth;
+    private int[] state = new int[9]; // state of a specific node from a set
+    private Node parentNode; // node from which it was derived (for root element value is NULL)
+    private int emptyCell; // index of empty cell in state (calculates in Constructor)
+    private char action; // action by which node was received (for root element value is Null)
+    private int depth; // count of moving from root node (for root element value is 0)
 
     public Node(int[] state, Node parentNode, char action, int depth){
         this.parentNode = parentNode;
         this.action = action;
         this.depth = depth;
 
+        // copying state and searching for empty cell
 
         for(int i = 0; i < state.length; i++) {
             this.state[i] = state[i];
@@ -36,7 +37,12 @@ public class Node {
         return action;
     }
 
+    /*
+        Function compares object state to goalState,
+        if their value is equal => returns true, else => false
 
+        goalState can be different, not hard coding
+     */
     public boolean goalTest(int[] goalState){
         for(int i =0; i<goalState.length;i++){
             if(goalState[i]!= state[i]) {
@@ -46,7 +52,10 @@ public class Node {
         return true;
     }
 
-
+    /*
+        Prints array like matrix 3x3.
+        returns string
+     */
     public String printPuzzle(){
         String info = "";
         for(int i = 0; i < 9; i++){
@@ -61,7 +70,13 @@ public class Node {
         return info;
     }
 
-
+    //********************** MOVING FUNCTIONS **************************
+    /*
+        All of them have same logic:
+            1) Function creates new state
+            2) Based on movement, makes changes
+            3) Creates new Node, returns it
+     */
 
     public Node moveToRight(){
             int[] temp_state = state.clone();

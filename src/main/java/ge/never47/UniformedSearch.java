@@ -4,11 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UniformedSearch {
-    public static List<Node> openList = new ArrayList<>();
-    public static List<Node> closedList = new ArrayList<>();
-    private static int col_count = 3;
+    public static List<Node> openList = new ArrayList<>(); // nodes which children where not studied
+    public static List<Node> closedList = new ArrayList<>(); // nodes that were studied
+    private static int col_count = 3; // just for code design <3
 
-
+    /*
+        Breadth First Search:
+            1) Algorithm adds root node in openList
+                and works until openList is not empty, or goal is find
+            2) Removes node from openList and starts its studying
+            3) Creates list of nodes children, that were created
+                by using allowable movements(right, left, up, down)
+            4) Checks each child on reaching goal state
+                Success: ends searching
+                Fail: adds child in the end of the openList in condition that
+                        its unique, no such element in openList/closedList
+            5) After checking all the children, adds node to closedList
+     */
     public static void BFS(Node root) {
         boolean goalFound = false;
         openList.add(root);
@@ -49,6 +61,7 @@ public class UniformedSearch {
 
                 )) {
                     System.out.println("FIND");
+
                     goalFound = true;
                     break;
                 }
