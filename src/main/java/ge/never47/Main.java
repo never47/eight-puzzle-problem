@@ -5,8 +5,6 @@ import ge.never47.nodes.Node;
 import ge.never47.nodes.NodeInformed;
 import ge.never47.algorithms.InformedSearch;
 
-import java.sql.SQLOutput;
-
 /*
     There is two algorithms for searching goal_state.
         1) BFS (UnInformed Search)
