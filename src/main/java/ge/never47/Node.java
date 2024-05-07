@@ -39,6 +39,8 @@ public class Node {
         return action;
     }
 
+    public int getDepth(){return depth;}
+
     /*
         Function compares object state to goalState,
         if their value is equal => returns true, else => false
@@ -77,6 +79,9 @@ public class Node {
             2) Based on movement, makes changes
             3) Creates new Node, returns it
      */
+    public int[] getStateClone(){
+        return state.clone();
+    }
 
     public Node moveToRight(){
             int[] temp_state = state.clone();

@@ -1,6 +1,10 @@
 package ge.never47;
 
+import ge.never47.algorithms.InformedSearch;
 import ge.never47.algorithms.UnInformedSearch;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     static int[] goal_state =  {
@@ -8,6 +12,7 @@ public class Main {
             8, 0, 4,
             7, 6, 5
     };
+
     public static void main(String[] args){
         int[] init_state = {
                 8,3,2,
@@ -16,8 +21,9 @@ public class Main {
         };
 
 
-        Node root = new Node(init_state, null, 'n', 0);
+        NodeInformed root = new NodeInformed(init_state, null, 'n', 0);
 
-        UnInformedSearch.BFS(root);
+        //UnInformedSearch.BFS(root);
+        InformedSearch.A_star(root);
     }
 }

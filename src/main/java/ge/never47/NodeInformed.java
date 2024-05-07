@@ -15,7 +15,7 @@ public class NodeInformed extends Node implements Comparable<NodeInformed>{
             for(int j=0;j<9;j++){
                 if(state[i]!=0 && goal_state[j]!=0){
                     if(state[i]==goal_state[j]){
-                        distance+= Math.abs(j%3 - i%3) + Math.abs(j/3 - i/3);
+                        distance+= (Math.abs(j%3 - i%3) + Math.abs(j/3 - i/3));
                     }
                 }
             }
