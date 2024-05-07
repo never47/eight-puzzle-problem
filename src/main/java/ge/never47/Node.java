@@ -6,12 +6,14 @@ package ge.never47;
 
 import java.util.Arrays;
 
+import static ge.never47.Main.goal_state;
+
 public class Node {
-    private int[] state = new int[9]; // state of a specific node from a set
-    private Node parentNode; // node from which it was derived (for root element value is NULL)
-    private int emptyCell; // index of empty cell in state (calculates in Constructor)
-    private char action; // action by which node was received (for root element value is Null)
-    private int depth; // count of moving from root node (for root element value is 0)
+    protected int[] state = new int[9]; // state of a specific node from a set
+    protected Node parentNode; // node from which it was derived (for root element value is NULL)
+    protected int emptyCell; // index of empty cell in state (calculates in Constructor)
+    protected char action; // action by which node was received (for root element value is Null)
+    protected int depth; // count of moving from root node (for root element value is 0)
 
     public Node(int[] state, Node parentNode, char action, int depth){
         this.parentNode = parentNode;
@@ -43,9 +45,9 @@ public class Node {
 
         goalState matrix can be different
      */
-    public boolean goalTest(int[] goalState){
-        for(int i =0; i<goalState.length;i++){
-            if(goalState[i]!= state[i]) {
+    public boolean goalTest(){
+        for(int i =0; i<goal_state.length;i++){
+            if(goal_state[i]!= state[i]) {
                 return false;
             }
         }

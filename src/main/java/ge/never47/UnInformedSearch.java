@@ -56,12 +56,7 @@ public class UnInformedSearch {
 
             // *** Checking each child on goalTest, adding to openList ***
             for (Node currNode_child : currNode_children) {
-                if (currNode_child.goalTest(new int[]
-                        {1, 2, 3,
-                                8, 0, 4,
-                                7, 6, 5}
-
-                )) {
+                if (currNode_child.goalTest()) {
                     System.out.println("FIND");
 
                     goalFound = true;
