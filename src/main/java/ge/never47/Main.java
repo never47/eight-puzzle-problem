@@ -1,13 +1,10 @@
 package ge.never47;
 
+import ge.never47.nodes.NodeInformed;
 import ge.never47.algorithms.InformedSearch;
-import ge.never47.algorithms.UnInformedSearch;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
-    static int[] goal_state =  {
+    public static int[] goal_state =  {
             1, 2, 3,
             8, 0, 4,
             7, 6, 5

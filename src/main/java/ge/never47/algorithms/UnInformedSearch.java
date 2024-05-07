@@ -1,6 +1,6 @@
 package ge.never47.algorithms;
 
-import ge.never47.Node;
+import ge.never47.nodes.Node;
 
 import java.util.ArrayList;
 import java.util.List;

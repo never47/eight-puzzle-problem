@@ -1,4 +1,4 @@
-package ge.never47;
+package ge.never47.nodes;
 
 /*
     Each node represents state of searching algorithm and some additional information
