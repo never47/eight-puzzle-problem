@@ -31,11 +31,11 @@ public class Node {
         }
     }
 
-    int getEmptyCell(){
+    public int getEmptyCell(){
         return emptyCell;
     }
 
-    char getAction(){
+    public char getAction(){
         return action;
     }
 

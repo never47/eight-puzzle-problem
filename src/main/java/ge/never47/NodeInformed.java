@@ -1,7 +1,7 @@
 package ge.never47;
 import static ge.never47.Main.goal_state;
 
-public class NodeInformed extends Node{
+public class NodeInformed extends Node implements Comparable<NodeInformed>{
     protected int h = 0;
 
     public NodeInformed(int[] state, Node parentNode, char action, int depth) {
@@ -27,5 +27,10 @@ public class NodeInformed extends Node{
     public int f_function(){
         manhattan_function();
         return h + depth;
+    }
+
+    @Override
+    public int compareTo(NodeInformed o) {
+        return Integer.compare(this.f_function(), o.f_function());
     }
 }

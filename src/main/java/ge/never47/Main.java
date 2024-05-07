@@ -1,5 +1,7 @@
 package ge.never47;
 
+import ge.never47.algorithms.UnInformedSearch;
+
 public class Main {
     static int[] goal_state =  {
             1, 2, 3,
