@@ -45,13 +45,21 @@ public class UnInformedSearch {
                 }
 
                 if (!openList.contains(currNode_child) && !closedList.contains(currNode_child)) {
-                    System.out.println(currNode_child.printPuzzle());
+                    //System.out.println(currNode_child.printPuzzle());
                     openList.add(currNode_child);
                 }
             }
         }
     }
 
+    /*
+        This function explores all allowable children of the node.
+
+        1) Calculates which movements are possible
+        2) Clones state list of node, makes changes
+        3) Then creates new object with new state
+        4) Adds all objects in nodeChildren list, then returns
+     */
     private static List<Node> exploreChildren(Node node){
         List<Node> nodeChildren = new ArrayList<>();
 

@@ -7,8 +7,18 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public class InformedSearch {
-    public static PriorityQueue<NodeInformed> openList = new PriorityQueue<>(); // nodes which children where not studied
-    public static List<NodeInformed> closedList = new ArrayList<>(); // nodes that were studied
+    /*
+        openList - // nodes which children where not studied
+        Using priorityQueue that automatically sorts objects inside
+        using comparable class property, compareTo function inside NodeInformed
+     */
+    public static PriorityQueue<NodeInformed> openList = new PriorityQueue<>();
+
+    /*
+        closedList - // nodes that were studied
+        No need in priorityQueue, i just save nodes that i have studied
+     */
+    public static List<NodeInformed> closedList = new ArrayList<>();
 
     public static void A_star(NodeInformed root) {
         // ************ Adding root in openList, STARTING ************
@@ -23,7 +33,7 @@ public class InformedSearch {
             // ***** Calculating allowable movements => adding children into list *****
             PriorityQueue<NodeInformed> currNode_children = exploreChildren(currNode);
 
-            // *** Checking each child on goalTest, adding to openList ***
+            // ***** Checking each child on goalTest, adding to openList(sort auto) *****
             for (NodeInformed currNode_child : currNode_children) {
                 if (currNode_child.goalTest()) {
                     System.out.println("FIND");
@@ -33,13 +43,21 @@ public class InformedSearch {
                 }
 
                 if (!openList.contains(currNode_child) && !closedList.contains(currNode_child)) {
-                    System.out.println(currNode_child.printPuzzle());
+                    //System.out.println(currNode_child.printPuzzle());
                     openList.add(currNode_child);
                 }
             }
         }
     }
 
+    /*
+        This function explores all allowable children of the node.
+
+        1) Calculates which movements are possible
+        2) Clones state list of node, makes changes
+        3) Then creates new object with new state
+        4) Adds all objects in nodeChildren list, then returns
+     */
     private static PriorityQueue<NodeInformed> exploreChildren(NodeInformed node){
         PriorityQueue<NodeInformed> nodeChildren = new PriorityQueue<>();
 
