@@ -41,6 +41,10 @@ public class Node {
 
     public int getDepth(){return depth;}
 
+    public int[] getStateClone(){
+        return state.clone();
+    }
+
     /*
         Function compares object state to goalState,
         if their value is equal => returns true, else => false
@@ -70,53 +74,6 @@ public class Node {
 
         info+="\n";
         return info;
-    }
-
-    //********************** MOVING FUNCTIONS **************************
-    /*
-        All of them have same logic:
-            1) Function creates new state
-            2) Based on movement, makes changes
-            3) Creates new Node, returns it
-     */
-    public int[] getStateClone(){
-        return state.clone();
-    }
-
-    public Node moveToRight(){
-            int[] temp_state = state.clone();
-
-            temp_state[emptyCell] = temp_state[emptyCell +1];
-            temp_state[emptyCell + 1] = 0;
-
-            return new Node(temp_state, this, 'r', this.depth+1);
-    }
-
-    public Node moveToLeft(){
-        int[] temp_state = state.clone();
-
-        temp_state[emptyCell] = temp_state[emptyCell -1];
-        temp_state[emptyCell - 1] = 0;
-
-        return new Node(temp_state, this, 'l', this.depth+1);
-    }
-
-    public Node moveToUp(){
-        int[] temp_state = state.clone();
-
-        temp_state[emptyCell] = temp_state[emptyCell -3];
-        temp_state[emptyCell - 3] = 0;
-
-        return new Node(temp_state, this, 'u', this.depth+1);
-    }
-
-    public Node moveToDown(){
-        int[] temp_state = state.clone();
-
-        temp_state[emptyCell] = temp_state[emptyCell + 3];
-        temp_state[emptyCell + 3] = 0;
-
-        return new Node(temp_state, this, 'd', this.depth+1);
     }
 
     @Override
