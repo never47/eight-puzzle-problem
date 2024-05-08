@@ -98,15 +98,14 @@ public class mainScreenController {
             return;
         }
 
-        int i = 0;
-        for(TextField textField : textFields){
-            goal_state[i++] = Integer.parseInt(textField.getText());
+        for (int i = 0; i < 9; i++) {
+            goal_state[i] = arrayProperties[i].get();
         }
 
         Tools.showAlarm(Alert.AlertType.INFORMATION,
                 "Goal State Changing",
                 "Goal state was successfully changed"
-                );
+        );
     }
 
     public void startSolving(ActionEvent actionEvent) {

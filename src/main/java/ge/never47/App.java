@@ -14,7 +14,7 @@ public class App extends Application {
         Scene scene = new Scene(fxmlLoader.load());
 
         stage.setResizable(false);
-        stage.setTitle("");
+        stage.setTitle("Eight Puzzle Solver");
         stage.setScene(scene);
         stage.show();
     }
