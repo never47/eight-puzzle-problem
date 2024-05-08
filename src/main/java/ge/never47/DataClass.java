@@ -1,5 +1,7 @@
 package ge.never47;
 
+import ge.never47.controllers.mainScreenController;
+
 public class DataClass {
     public static int[] goal_state =  {
             1, 2, 3,

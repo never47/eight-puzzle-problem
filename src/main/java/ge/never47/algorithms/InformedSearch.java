@@ -1,17 +1,19 @@
 package ge.never47.algorithms;
 
 import ge.never47.nodes.NodeInformed;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
+
 public class InformedSearch {
     /*
-        openList - // nodes which children where not studied
-        Using priorityQueue that automatically sorts objects inside
-        using comparable class property, compareTo function inside NodeInformed
-     */
+            openList - // nodes which children where not studied
+            Using priorityQueue that automatically sorts objects inside
+            using comparable class property, compareTo function inside NodeInformed
+         */
     public static PriorityQueue<NodeInformed> openList = new PriorityQueue<>();
 
     /*
@@ -19,6 +21,8 @@ public class InformedSearch {
         No need in priorityQueue, i just save nodes that i have studied
      */
     public static List<NodeInformed> closedList = new ArrayList<>();
+
+
 
     public static void A_star(NodeInformed root) {
         // ************ Adding root in openList, STARTING ************
@@ -43,7 +47,6 @@ public class InformedSearch {
                 }
 
                 if (!openList.contains(currNode_child) && !closedList.contains(currNode_child)) {
-                    //System.out.println(currNode_child.printPuzzle());
                     openList.add(currNode_child);
                 }
             }

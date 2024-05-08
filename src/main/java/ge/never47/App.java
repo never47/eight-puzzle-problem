@@ -12,6 +12,7 @@ public class App extends Application {
                 getClass().getResource("mainScreen.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
+
         stage.setResizable(false);
         stage.setTitle("");
         stage.setScene(scene);

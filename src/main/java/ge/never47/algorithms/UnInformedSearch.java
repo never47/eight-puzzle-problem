@@ -45,7 +45,6 @@ public class UnInformedSearch {
                 }
 
                 if (!openList.contains(currNode_child) && !closedList.contains(currNode_child)) {
-                    //System.out.println(currNode_child.printPuzzle());
                     openList.add(currNode_child);
                 }
             }

@@ -41,6 +41,7 @@ public class Node {
 
     public int getDepth(){return depth;}
 
+    public int[] getState(){return state;}
     public int[] getStateClone(){
         return state.clone();
     }

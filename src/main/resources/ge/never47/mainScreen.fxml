@@ -3,9 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -129,20 +129,35 @@
                            <Insets top="10.0" />
                         </VBox.margin>
                      </Button>
-                     <Button mnemonicParsing="false" prefWidth="150.0" text="Change Goal State">
+                     <HBox alignment="CENTER">
+                        <children>
+                           <Label text="Algorithm: ">
+                              <HBox.margin>
+                                 <Insets right="10.0" />
+                              </HBox.margin>
+                           </Label>
+                           <RadioButton mnemonicParsing="false" onAction="#selectAlgoBfs" selected="true" text="BFS">
+                              <HBox.margin>
+                                 <Insets right="5.0" />
+                              </HBox.margin>
+                              <toggleGroup>
+                                 <ToggleGroup fx:id="but" />
+                              </toggleGroup>
+                           </RadioButton>
+                           <RadioButton mnemonicParsing="false" onAction="#selectAlgoA" text="A*" toggleGroup="$but" />
+                        </children>
+                        <VBox.margin>
+                           <Insets top="15.0" />
+                        </VBox.margin>
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets>
+                     </HBox>
+                     <Button mnemonicParsing="false" onAction="#changeGoalState" prefWidth="150.0" text="Change Goal State">
                         <VBox.margin>
                            <Insets top="15.0" />
                         </VBox.margin>
                      </Button>
-                     <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Select an Algorithm">
-                       <items>
-                         <MenuItem mnemonicParsing="false" text="BFS" />
-                         <MenuItem mnemonicParsing="false" text="A*" />
-                       </items>
-                        <VBox.margin>
-                           <Insets top="15.0" />
-                        </VBox.margin>
-                     </MenuButton>
                      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startSolving" prefHeight="40.0" text="START" textAlignment="CENTER">
                         <font>
                            <Font size="14.0" />
