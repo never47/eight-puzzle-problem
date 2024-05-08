@@ -78,45 +78,18 @@
                      </TextField>
                   </children>
                </GridPane>
-               <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+               <VBox fx:id="buttonsLayer" alignment="CENTER" HBox.hgrow="ALWAYS">
                   <children>
-                     <Label prefHeight="27.0" prefWidth="195.0" text="Information:">
-                        <font>
-                           <Font size="18.0" />
-                        </font>
-                     </Label>
-                     <HBox>
-                        <children>
-                           <VBox alignment="TOP_RIGHT" prefWidth="100.0">
-                              <children>
-                                 <Label text="Time remaining:" />
-                              </children>
-                              <HBox.margin>
-                                 <Insets />
-                              </HBox.margin>
-                              <padding>
-                                 <Insets left="10.0" />
-                              </padding>
-                           </VBox>
-                           <VBox prefWidth="100.0">
-                              <children>
-                                 <Label fx:id="timerId" text="0" />
-                              </children>
-                              <opaqueInsets>
-                                 <Insets />
-                              </opaqueInsets>
-                              <padding>
-                                 <Insets left="15.0" />
-                              </padding>
-                           </VBox>
-                        </children>
-                        <VBox.margin>
-                           <Insets bottom="40.0" />
-                        </VBox.margin></HBox>
                      <Label alignment="TOP_LEFT" prefHeight="27.0" prefWidth="199.0" text="Settings:">
                         <font>
                            <Font size="18.0" />
                         </font>
+                        <VBox.margin>
+                           <Insets />
+                        </VBox.margin>
+                        <padding>
+                           <Insets left="10.0" />
+                        </padding>
                      </Label>
                      <Button mnemonicParsing="false" onAction="#randomInitState" prefWidth="150.0" text="Random Init State">
                         <VBox.margin>
@@ -152,12 +125,20 @@
                            <Insets top="15.0" />
                         </VBox.margin>
                      </Button>
-                     <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startSolving" prefHeight="40.0" text="START" textAlignment="CENTER">
+                     <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startSolving" prefHeight="40.0" prefWidth="150.0" text="START" textAlignment="CENTER">
                         <font>
                            <Font size="14.0" />
                         </font>
                         <VBox.margin>
-                           <Insets top="30.0" />
+                           <Insets top="70.0" />
+                        </VBox.margin>
+                     </Button>
+                     <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showResult" prefHeight="40.0" prefWidth="150.0" text="SHOW RESULT" textAlignment="CENTER">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets top="10.0" />
                         </VBox.margin>
                      </Button>
                   </children>

@@ -5,7 +5,7 @@ import static ge.never47.DataClass.goal_state;
 public class NodeInformed extends Node implements Comparable<NodeInformed>{
     protected int h = 0; // value of heuristic function
 
-    public NodeInformed(int[] state, Node parentNode, char action, int depth) {
+    public NodeInformed(int[] state, Node parentNode, String action, int depth) {
         super(state, parentNode, action, depth);
     }
 

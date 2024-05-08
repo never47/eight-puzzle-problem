@@ -23,7 +23,7 @@ public class UnInformedSearch {
                         its unique, no such element in openList/closedList
             5) After checking all the children, adds node to closedList
      */
-    public static boolean BFS(Node root) {
+    public static Node BFS(Node root) {
         // ************ Adding root in openList, STARTING ************
         openList.add(root);
 
@@ -40,7 +40,7 @@ public class UnInformedSearch {
                 if (currNode_child.goalTest()) {
                     mainScreenController.guiUpdate(currNode_child.getState());
 
-                    return true;
+                    return currNode_child;
                 }
 
                 if (!openList.contains(currNode_child) && !closedList.contains(currNode_child)) {
@@ -49,7 +49,7 @@ public class UnInformedSearch {
                 }
             }
         }
-        return false;
+        return null;
     }
 
     /*
@@ -68,40 +68,40 @@ public class UnInformedSearch {
         int row = Math.floorDiv(empty_cell, 3);
         int column = empty_cell % 3;
 
-        if(node.getAction()!='l' && column < 2){
+        if(!node.getAction().equals("LEFT") && column < 2){
             int[] temp_state = node.getStateClone();
 
             temp_state[empty_cell] = temp_state[empty_cell + 1];
             temp_state[empty_cell + 1] = 0;
 
-            nodeChildren.add(new Node(temp_state, node, 'r', depth+1));
+            nodeChildren.add(new Node(temp_state, node, "RIGHT", depth+1));
         }
 
-        if(node.getAction()!='r' && column > 0){
+        if(!node.getAction().equals("RIGHT") && column > 0){
             int[] temp_state = node.getStateClone();
 
             temp_state[empty_cell] = temp_state[empty_cell -1];
             temp_state[empty_cell - 1] = 0;
 
-            nodeChildren.add(new Node(temp_state, node, 'l', depth+1));
+            nodeChildren.add(new Node(temp_state, node, "LEFT", depth+1));
         }
 
-        if(node.getAction()!='d' && row > 0){
+        if(!node.getAction().equals("DOWN") && row > 0){
             int[] temp_state = node.getStateClone();
 
             temp_state[empty_cell] = temp_state[empty_cell - 3];
             temp_state[empty_cell - 3] = 0;
 
-            nodeChildren.add(new Node(temp_state, node, 'u', depth+1));
+            nodeChildren.add(new Node(temp_state, node, "UP", depth+1));
         }
 
-        if(node.getAction()!='u' && row < 2){
+        if(!node.getAction().equals("UP") && row < 2){
             int[] temp_state = node.getStateClone();
 
             temp_state[empty_cell] = temp_state[empty_cell + 3];
             temp_state[empty_cell + 3] = 0;
 
-            nodeChildren.add(new Node(temp_state, node, 'd', depth+1));
+            nodeChildren.add(new Node(temp_state, node, "DOWN", depth+1));
         }
 
         return nodeChildren;

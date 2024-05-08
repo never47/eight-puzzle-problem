@@ -12,10 +12,10 @@ public class Node {
     protected int[] state = new int[9]; // state of a specific node from a set
     protected Node parentNode; // node from which it was derived (for root element value is NULL)
     protected int emptyCell; // index of empty cell in state (calculates in Constructor)
-    protected char action; // action by which node was received (for root element value is Null)
+    protected String action; // action by which node was received (for root element value is Null)
     protected int depth; // count of moving from root node (for root element value is 0)
 
-    public Node(int[] state, Node parentNode, char action, int depth){
+    public Node(int[] state, Node parentNode, String action, int depth){
         this.parentNode = parentNode;
         this.action = action;
         this.depth = depth;
@@ -35,13 +35,14 @@ public class Node {
         return emptyCell;
     }
 
-    public char getAction(){
+    public String getAction(){
         return action;
     }
 
     public int getDepth(){return depth;}
 
     public int[] getState(){return state;}
+    public Node getParentNode(){return parentNode;}
     public int[] getStateClone(){
         return state.clone();
     }
@@ -66,14 +67,15 @@ public class Node {
         returns string
      */
     public String printPuzzle(){
-        String info = "";
+        String info = "<=== " + action + " ===>";
         for(int i = 0; i < 9; i++){
-            if(i%3==0) info+="\n";
+            if(i%3==0) info+="\n\t";
 
             info+= state[i] + " ";
         }
 
         info+="\n";
+
         return info;
     }
 
