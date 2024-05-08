@@ -1,5 +1,6 @@
 package ge.never47.algorithms;
 
+import ge.never47.controllers.mainScreenController;
 import ge.never47.nodes.Node;
 
 import java.util.ArrayList;
@@ -22,12 +23,11 @@ public class UnInformedSearch {
                         its unique, no such element in openList/closedList
             5) After checking all the children, adds node to closedList
      */
-    public static void BFS(Node root) {
+    public static boolean BFS(Node root) {
         // ************ Adding root in openList, STARTING ************
-        boolean goalFound = false;
         openList.add(root);
 
-        while(!openList.isEmpty() && !goalFound){
+        while(!openList.isEmpty()){
             // ******* Getting first in queue, creating its children list *******
             Node currNode = openList.remove(0);
             closedList.add(currNode);
@@ -38,17 +38,18 @@ public class UnInformedSearch {
             // *** Checking each child on goalTest, adding to openList ***
             for (Node currNode_child : currNode_children) {
                 if (currNode_child.goalTest()) {
-                    System.out.println("FIND");
+                    mainScreenController.guiUpdate(currNode_child.getState());
 
-                    goalFound = true;
-                    break;
+                    return true;
                 }
 
                 if (!openList.contains(currNode_child) && !closedList.contains(currNode_child)) {
+                    mainScreenController.guiUpdate(currNode_child.getState());
                     openList.add(currNode_child);
                 }
             }
         }
+        return false;
     }
 
     /*

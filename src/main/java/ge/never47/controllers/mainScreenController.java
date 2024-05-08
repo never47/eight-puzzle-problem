@@ -5,12 +5,12 @@ import ge.never47.algorithms.InformedSearch;
 import ge.never47.algorithms.UnInformedSearch;
 import ge.never47.nodes.Node;
 import ge.never47.nodes.NodeInformed;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import java.util.List;
@@ -24,28 +24,37 @@ public class mainScreenController {
     @FXML
     private GridPane gridPane;
 
-    @FXML
-    private AnchorPane innerAnchorPane;
-
     List<TextField> textFields;
 
     int algorithm_number = 0; // 0 - BFS, 1 - A
 
+    static SimpleIntegerProperty[] arrayProperties = new SimpleIntegerProperty[9];
 
     public void initialize() {
-        setGridFields();
+        for (int i = 0; i < 9; i++) {
+            arrayProperties[i] = new SimpleIntegerProperty(init_state[i]);
+        }
 
-    }
-
-    private void setGridFields(){
         textFields = gridPane.getChildren().stream()
                 .filter(node -> node instanceof TextField)
                 .map(node -> (TextField) node)
                 .collect(Collectors.toList());
+
+        for(int i = 0;i < 9;i++){
+            textFields.get(i).textProperty().bind(arrayProperties[i].asString());
+        }
     }
 
+    public static void guiUpdate(int[] array){
+        Platform.runLater(() -> {
+            for (int i = 0; i < 9; i++) {
+                arrayProperties[i].set(array[i]);
+            }
+        });
+    }
+
+
     public void randomInitState() {
-        if(textFields == null) setGridFields();
         Random rand = new Random();
 
         for (int i = 0; i < init_state.length; i++) {
@@ -55,9 +64,8 @@ public class mainScreenController {
             init_state[i] = temp;
         }
 
-        int i = 0;
-        for (TextField textField : textFields){
-            textField.setText(String.valueOf(init_state[i++]));
+        for (int i = 0; i < 9; i++) {
+            arrayProperties[i].set(init_state[i]);
         }
     }
 
@@ -82,7 +90,6 @@ public class mainScreenController {
     }
 
     public void changeGoalState(ActionEvent actionEvent) {
-        if(textFields == null) setGridFields();
         if(!validTextFields()) {
             Tools.showAlarm(
                     Alert.AlertType.ERROR,
@@ -103,7 +110,6 @@ public class mainScreenController {
     }
 
     public void startSolving(ActionEvent actionEvent) {
-        if(textFields == null) setGridFields();
         if(!validTextFields()) {
             Tools.showAlarm(
                     Alert.AlertType.ERROR,
@@ -114,10 +120,26 @@ public class mainScreenController {
 
         NodeInformed root = new NodeInformed(init_state, null, 'n', 0);
 
-        if(algorithm_number == 0){
-            InformedSearch.A_star(root);
+        boolean isSolved;
+
+        if(algorithm_number == 1){
+            isSolved = InformedSearch.A_star(root);
         }else{
-            UnInformedSearch.BFS((Node) root);
+            isSolved = UnInformedSearch.BFS((Node) root);
+        }
+
+        if(isSolved){
+            Tools.showAlarm(
+                    Alert.AlertType.INFORMATION,
+                    "",
+                    "Solve was found!"
+            );
+        }else{
+            Tools.showAlarm(
+                    Alert.AlertType.INFORMATION,
+                    "",
+                    "Solve wasn't found!"
+            );
         }
     }
 }

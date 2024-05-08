@@ -1,5 +1,6 @@
 package ge.never47.nodes;
-import static ge.never47.Main.goal_state;
+
+import static ge.never47.DataClass.goal_state;
 
 public class NodeInformed extends Node implements Comparable<NodeInformed>{
     protected int h = 0; // value of heuristic function

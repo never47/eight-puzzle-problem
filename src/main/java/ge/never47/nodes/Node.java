@@ -6,7 +6,7 @@ package ge.never47.nodes;
 
 import java.util.Arrays;
 
-import static ge.never47.Main.goal_state;
+import static ge.never47.DataClass.goal_state;
 
 public class Node {
     protected int[] state = new int[9]; // state of a specific node from a set

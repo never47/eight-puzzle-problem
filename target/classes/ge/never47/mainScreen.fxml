@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ge.never47.controllers.mainScreenController">
-    <AnchorPane fx:id="innerAnchorPane" nodeOrientation="LEFT_TO_RIGHT" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+    <AnchorPane nodeOrientation="LEFT_TO_RIGHT" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
       <children>
          <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -89,11 +89,6 @@
                         <children>
                            <VBox alignment="TOP_RIGHT" prefWidth="100.0">
                               <children>
-                                 <Label text="Depth level: ">
-                                    <VBox.margin>
-                                       <Insets />
-                                    </VBox.margin>
-                                 </Label>
                                  <Label text="Time remaining:" />
                               </children>
                               <HBox.margin>
@@ -105,8 +100,7 @@
                            </VBox>
                            <VBox prefWidth="100.0">
                               <children>
-                                 <Label text="0" />
-                                 <Label text="00:00" />
+                                 <Label fx:id="timerId" text="0" />
                               </children>
                               <opaqueInsets>
                                  <Insets />

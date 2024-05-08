@@ -16,13 +16,15 @@ import ge.never47.algorithms.InformedSearch;
 
  */
 public class Main {
+    /*
     public static int[] goal_state =  {
             1, 2, 3,
             8, 0, 4,
             7, 6, 5
     };
-
+    */
     public static void main(String[] args){
+        /*
         int[] init_state = {
                 8,3,2,
                 1,0,4,
@@ -52,5 +54,8 @@ public class Main {
         endTime = System.nanoTime();
         duration = (endTime - startTime)/1_000_000_000.0;
         System.out.println("Duration for BFS " + duration + " nanosec");
+
+        
+         */
     }
 }

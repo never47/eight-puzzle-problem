@@ -1,7 +1,7 @@
 package ge.never47.algorithms;
 
+import ge.never47.controllers.mainScreenController;
 import ge.never47.nodes.NodeInformed;
-import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +23,11 @@ public class InformedSearch {
     public static List<NodeInformed> closedList = new ArrayList<>();
 
 
-
-    public static void A_star(NodeInformed root) {
+    public static boolean A_star(NodeInformed root) {
         // ************ Adding root in openList, STARTING ************
-        boolean goalFound = false;
         openList.add(root);
 
-        while(!openList.isEmpty() && !goalFound){
+        while(!openList.isEmpty()){
             // ******* Getting first in queue, creating its children list *******
             NodeInformed currNode = openList.remove();
             closedList.add(currNode);
@@ -40,17 +38,18 @@ public class InformedSearch {
             // ***** Checking each child on goalTest, adding to openList(sort auto) *****
             for (NodeInformed currNode_child : currNode_children) {
                 if (currNode_child.goalTest()) {
-                    System.out.println("FIND");
+                    mainScreenController.guiUpdate(currNode_child.getState());
 
-                    goalFound = true;
-                    break;
+                    return true;
                 }
 
                 if (!openList.contains(currNode_child) && !closedList.contains(currNode_child)) {
+                    mainScreenController.guiUpdate(currNode_child.getState());
                     openList.add(currNode_child);
                 }
             }
         }
+        return false;
     }
 
     /*
