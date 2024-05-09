@@ -1,0 +1,4 @@
+--patch-module
+ge.never47=_
+--add-reads
+ge.never47=ALL-UNNAMED
