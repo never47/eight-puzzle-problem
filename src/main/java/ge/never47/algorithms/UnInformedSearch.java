@@ -37,14 +37,13 @@ public class UnInformedSearch {
 
             // *** Checking each child on goalTest, adding to openList ***
             for (Node currNode_child : currNode_children) {
-                if (currNode_child.goalTest()) {
-                    mainScreenController.guiUpdate(currNode_child.getState());
+                mainScreenController.guiUpdate(currNode_child.getState());
 
+                if (currNode_child.goalTest()) {
                     return currNode_child;
                 }
 
                 if (!openList.contains(currNode_child) && !closedList.contains(currNode_child)) {
-                    mainScreenController.guiUpdate(currNode_child.getState());
                     openList.add(currNode_child);
                 }
             }

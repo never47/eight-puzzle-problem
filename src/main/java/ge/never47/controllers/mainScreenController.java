@@ -18,13 +18,18 @@ import javafx.scene.layout.VBox;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static ge.never47.DataClass.goal_state;
 import static ge.never47.DataClass.init_state;
 
+
+/*
+    GUI CONTROLLER CLASS
+
+    Functions are connected to buttons, they are called, when buttons were clicked.
+ */
 public class mainScreenController {
     public VBox buttonsLayer;
     @FXML
@@ -34,28 +39,57 @@ public class mainScreenController {
     List<Button> buttons = new ArrayList<>();
 
     private int algorithm_number = 0; // 0 - BFS, 1 - A
+
+    /*
+        App is printing info about algorithm, which one it was using
+
+        The variable last_worked_algorithm_number is used to
+        save last used algorithm(just for printing)
+
+        P.S can't use algorithm_number variable, becase
+            user can change algorithm_number before clicking on SHOW RESULTS
+     */
     private int last_worked_algorithm_number = 0;
 
+    /*
+        arrayProperties => automatically updates GUI textfields (there is written info about states)
+            when it gets new values
+
+        Quite easy: change arrayProperties and it will occur on display
+     */
     static SimpleIntegerProperty[] arrayProperties = new SimpleIntegerProperty[9];
 
+    /*
+        searchedNode => last node(if it was find) that equals to goal_state
+
+        using this one to print pathTrace
+     */
     private Node searchedNode = null;
 
-    private double duration = 0;
+    private double duration = 0; // for time counting in millisecs
 
+    /*
+        This functions is called automatically when class creates
+     */
     public void initialize() {
+        // creating and initializing arrayProperties with init_state
         for (int i = 0; i < 9; i++) {
             arrayProperties[i] = new SimpleIntegerProperty(init_state[i]);
         }
 
+        // gets all textFields from the grid, used to occur states info
         textFields = gridPane.getChildren().stream()
                 .filter(node -> node instanceof TextField)
                 .map(node -> (TextField) node)
                 .collect(Collectors.toList());
 
+        // binding textFields with arrayProperties
         for(int i = 0;i < 9;i++){
             textFields.get(i).textProperty().bind(arrayProperties[i].asString());
         }
 
+        // getting all buttons from the layout, used to disable some buttons
+            // while other one is pressed
         for (javafx.scene.Node node : buttonsLayer.getChildren()) {
             if (node instanceof Button) {
                 buttons.add((Button) node);
@@ -63,6 +97,12 @@ public class mainScreenController {
         }
     }
 
+    /*
+        Showing state information on display
+
+        Function gets some array and copies its values
+        to arrayProperties, which is binded with textFields (initialize func)
+     */
     public static void guiUpdate(int[] array){
         Platform.runLater(() -> {
             for (int i = 0; i < 9; i++) {
@@ -71,6 +111,9 @@ public class mainScreenController {
         });
     }
 
+    /*
+        Disable all layout buttons except active button
+     */
     private void disableOtherButtons(Button button){
         for(Button curButton : buttons){
             if(!curButton.equals(button)){
@@ -79,13 +122,18 @@ public class mainScreenController {
         }
     }
 
+    /*
+        Enables all layout buttons
+    */
     private void enableAllButtons(){
         for(Button curButton : buttons){
             curButton.setDisable(false);
         }
     }
 
-
+    /*
+        Shuffles init_state,  copies info in arrayProperties
+     */
     public void randomInitState() {
         Random rand = new Random();
 
@@ -109,6 +157,9 @@ public class mainScreenController {
         algorithm_number = 1;
     }
 
+    /*
+        Checks array values, in must have each value from [0...8], if not -> error
+     */
     private boolean validTextFields(){
         for(int i = 0; i<9;i++){
             for(int j=0; j<9;j++){
@@ -121,6 +172,9 @@ public class mainScreenController {
         return true;
     }
 
+    /*
+        Checks on valid and changes goal_state, shows some alarm
+     */
     public void changeGoalState(ActionEvent actionEvent) {
         if(!validTextFields()) {
             Tools.showAlarm(
@@ -140,6 +194,9 @@ public class mainScreenController {
         );
     }
 
+    /*
+        Checks validText, if its okay => gets new info from textFields, starts solving the problem
+     */
     public void startSolving(ActionEvent actionEvent) {
         if(!validTextFields()) {
             Tools.showAlarm(
@@ -149,8 +206,14 @@ public class mainScreenController {
             return;
         }
 
+        // copying process from textFields to arrayProperties
+        for(int i=0;i<textFields.size();i++){
+            arrayProperties[i].set(Integer.parseInt(textFields.get(i).getText()));
+        }
+
         disableOtherButtons((Button) actionEvent.getSource());
 
+        // if someting will gone wrong -> searchedNode will always be null
         searchedNode = null;
 
         NodeInformed root = new NodeInformed(init_state, null, "n", 0);
@@ -186,6 +249,9 @@ public class mainScreenController {
         enableAllButtons();
     }
 
+    /*
+        Creates .txt file with algorithm working result
+     */
     public void showResult(ActionEvent actionEvent) {
         if(searchedNode!=null){
             List<Node> pathTrace = new ArrayList<>();

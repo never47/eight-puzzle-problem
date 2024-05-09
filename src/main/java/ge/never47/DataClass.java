@@ -1,5 +1,11 @@
 package ge.never47;
 
+/*
+    Application Date class,
+
+    init_state class for root node,
+    goal_state -> what are you finding
+ */
 
 public class DataClass {
     public static int[] goal_state =  {
